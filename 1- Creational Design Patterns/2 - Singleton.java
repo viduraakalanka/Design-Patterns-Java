@@ -1,20 +1,21 @@
-public class PrintSpooler{
+public class Book{
 
-	private static PrintSpooler spooler_inst; //this is the only instance of this class
+	private static Book book_inst; //this is the only instance of this class
 	private static boolean initialized = false;
 
-	private PrintSpooler(){} //this is a private constructor which can only be instantiated from within the class
+	private Book(){} //this is a private constructor which can only be instantiated from within the class
 
 	private void init(){
 		//code to initialize the print spooler  goes here
 
 	}
 
-	public static PrintSpooler getInstance(){
-		if (initialized) return spooler_inst;
-		spooler_inst = new PrintSpooler();
-		spooler_inst.init();
+	public static synchronized Book getInstance(){ // synchronization prevent multiple treading creating seperate instances. 
+												   // when a thread access this method, second thread cant access it while first thread unlocks the method
+		if (initialized) return book_inst;
+		book_inst = new Book();
+		book_inst.init();
 		initialized = True
-		return spooler_inst
+		return book_inst
 	}
 }
